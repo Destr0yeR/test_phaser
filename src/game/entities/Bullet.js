@@ -9,10 +9,14 @@ function Bullet(name, x, y) {
 	this.sprite.scale.y *= 0.05;
 	this.height = this.sprite.height;
 	this.width = this.sprite.width;
+	this.velocity = {};
+	this.velocity.x = 0;
+	this.velocity.y = 0;
+	this.gravity = false;
 
 	this.addVelocity = function(velocity){
 		this.velocity.x += velocity.x;
-		this.velocity.y += velocity.y;	
+		this.velocity.y += velocity.y;
 	}
 
 	this.changeVelocity = function(velocity){
@@ -21,20 +25,33 @@ function Bullet(name, x, y) {
 	}
 
 	this.update = function(){
+		if(this.velocity.x != 0){
+			this.x += this.velocity.x;
+		}
+		if(this.gravity){
+			if(this.velocity.y != 0){
+				this.velocity.y += constants.getGravity();
+			}
+			this.y += this.velocity.y;
+		}
 		this.sprite.x = this.x;
 		this.sprite.y = this.y;
-
-		if(this.velocity.x > 0){
-			this.sprite.x += this.velocity.x;
-			this.velocity.x -= 0.1;
-		}
-		if(this.velocity.y > 0){
-			this.sprite.y += this.velocity.y;
-			this.velocity.y -= 0.1;
-		}
 	}
 
 	function createSprite(name, x, y){
 		return game.add.sprite(x, y, name);
+	}
+
+	this.changeScale = function(scale){
+		this.sprite.scale.x *= scale;
+		this.sprite.scale.y *= scale;
+	}
+
+	this.applyGravity = function(){
+		this.gravity = true;
+	}
+
+	this.releaseGravity = function(){
+		this.gravity = false;
 	}
 }

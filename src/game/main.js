@@ -10,6 +10,7 @@ var bullets = new Array();
 
 var player = null;
 var cursors = null;
+var keyboard = null;
 
 var PhysicsController = new Physics(constants.getGravity());
 
@@ -41,6 +42,7 @@ function create() {
 	constants.setWindowHeight(game.height);
 	constants.setWindowWidth(game.width);
 	cursors = game.input.keyboard.createCursorKeys();
+	keyboard = game.input.keyboard;
 
 	texAngle = game.add.text(game.world.centerX, game.world.centerY, "Angle : "+ Math.round(angle));
 	texAngle.anchor.setTo(0.5);
@@ -55,21 +57,56 @@ function update() {
 		var bullet = bullets[i];
 
 		if(!bullet.touching_platform){
-			PhysicsController.applyGravity(bullet);
+			bullet.applyGravity();
 		}
-		if((bullet.y + bullet.height) >= constants.getWindowHeight()){
-			bullet.touching_platform = true;
-		}
-
-		if(cursors.up.isDown){
-			angle += 0.05;
-		}
-		if(cursors.down.isDown){
-			angle -= 0.05;
+		else{
+			bullet.releaseGravity();
 		}
 
-		player.changeAngle(Math.round(-angle));
+		if((bullet.y + bullet.height) > constants.getWindowHeight()){
+			if(bullet.touching_platform == false){
+				bullet.touching_platform = true;
 
-		texAngle.setText("Angle : "+ Math.round(angle));
+				if(bullet.velocity.x != 0){
+					console.log("======INI====");
+					console.log(i);
+					console.log(bullet.y);
+					console.log(bullet.height);
+					console.log(constants.getWindowHeight());
+					console.log("======END=====");
+				}
+			}
+		}
+		if(bullet.velocity.x != 0){
+			if(bullet.y){
+				console.log(bullet.y);
+			}
+		}
+
+		bullet.update();
+	}
+
+	if(cursors.up.isDown){
+		angle += 0.1;
+	}
+	if(cursors.down.isDown){
+		angle -= 0.1;
+	}
+
+	player.changeAngle(Math.round(-angle));
+
+	texAngle.setText("Angle : "+ Math.round(angle));
+
+	if(keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+		if(!SPACEBAR_down){
+			var tmp = new Bullet('red', player.x, player.y);
+			tmp.changeScale(0.5);
+			tmp.addVelocity({x: 10, y: -20});
+			bullets.push(tmp);
+			SPACEBAR_down = true;
+		}
+	}
+	else{
+		SPACEBAR_down = false;
 	}
 }

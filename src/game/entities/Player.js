@@ -1,7 +1,10 @@
 function Player(){
 
-	this.sprite = createSprite('target', 0, game.height - 50);
-	this.arrow = createSprite('arrow', 0, game.height - 50);
+	this.sprite = createSprite('target', 0, game.height - 100);
+	this.arrow = createSprite('arrow', 0, game.height - 100);
+
+	this.x = this.sprite.x;
+	this.y = this.sprite.y;
 
 	this.sprite.scale.x *= 0.05;
 	this.sprite.scale.y *= 0.05;
@@ -21,7 +24,5 @@ function Player(){
 
 	this.changeAngle = function(angle){
 		this.arrow.angle = angle - 90;
-		console.log(this.arrow.angle);
 	}
-	
 }
