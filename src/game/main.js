@@ -51,8 +51,8 @@ function create() {
 
     var linear = new Linear();
 
-    var vector = new Vector(1,2,3);
-    var vector2 = new Vector(1,2,3);
+    var vector = new Vector(3,0,0);
+    var vector2 = new Vector(5,5,0);
 
     console.log(linear.crossProduct(vector, vector2));
     console.log(linear.dotProduct(vector, vector2));
