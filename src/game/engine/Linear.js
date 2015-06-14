@@ -1,5 +1,5 @@
 function Linear() {
-	
+
 	this.crossProduct = crossProduct;
 
 	this.dotProduct = dotProduct;
@@ -19,18 +19,22 @@ function Linear() {
 	}
 
 	function dotProduct(u, v) {
-		var result = new Vector();
 
-		result.x = u.x + v.x;
-		result.y = u.y + v.y;
-		result.z = u.z + v.z;
+		var x = u.x + v.x;
+		var y = u.y + v.y;
+		var z = u.z + v.z;
 
-		return result;
+		return (x + y + z);
 	}
 
 	function angle(u, v) {
+		console.log('___');
 		var result = dotProduct(u, v)/(_length(u)*_length(v));
-
+		console.log(dotProduct(u, v));
+		console.log(_length(u));
+		console.log(_length(v));
+		console.log(result);
+		console.log('---');
 		return (Math.acos(result)*180)/Math.acos(-1);
 	}
 

@@ -52,9 +52,12 @@ function create() {
     var linear = new Linear();
 
     var vector = new Vector(1,2,3);
-    var vector2 = new Vector(2,4,6);
+    var vector2 = new Vector(1,2,3);
 
     console.log(linear.crossProduct(vector, vector2));
+    console.log(linear.dotProduct(vector, vector2));
+    console.log(linear.angle(vector, vector2));
+    console.log(linear.angle(vector2, vector));
 }
 
 
