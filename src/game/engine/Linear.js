@@ -20,22 +20,16 @@ function Linear() {
 
 	function dotProduct(u, v) {
 
-		var x = u.x + v.x;
-		var y = u.y + v.y;
-		var z = u.z + v.z;
+		var x = u.x * v.x;
+		var y = u.y * v.y;
+		var z = u.z * v.z;
 
 		return (x + y + z);
 	}
 
 	function angle(u, v) {
-		console.log('___');
 		var result = dotProduct(u, v)/(_length(u)*_length(v));
-		console.log(dotProduct(u, v));
-		console.log(_length(u));
-		console.log(_length(v));
-		console.log(result);
-		console.log('---');
-		return (Math.acos(result)*180)/Math.acos(-1);
+		return (Math.acos(result.toFixed(12))*180)/Math.acos(-1);
 	}
 
 	function _length(u) {
