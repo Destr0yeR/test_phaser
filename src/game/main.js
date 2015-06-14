@@ -48,11 +48,18 @@ function create() {
 	texAngle.anchor.setTo(0.5);
 	texAngle.font = 'Revalia';
     texAngle.fontSize = 60;
+
+    var linear = new Linear();
+
+    var vector = new Vector(1,2,3);
+    var vector2 = new Vector(2,4,6);
+
+    console.log(linear.crossProduct(vector, vector2));
 }
 
 
 function update() {
-
+	/*
 	for(var i = 0 ; i < bullets.length ; ++i){
 		var bullet = bullets[i];
 
@@ -108,5 +115,5 @@ function update() {
 	}
 	else{
 		SPACEBAR_down = false;
-	}
+	}*/
 }
