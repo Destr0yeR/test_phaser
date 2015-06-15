@@ -17,6 +17,7 @@ var PhysicsController = new Physics(constants.getGravity());
 var textAngle = null;
 var angle = 0;
 
+var obj = new PhysicObject(5);
 google: {
       families: ['Revalia']
     }
@@ -49,11 +50,13 @@ function create() {
 	texAngle.font = 'Revalia';
     texAngle.fontSize = 60;
 
-
+    console.log(obj);
+    obj.addForce(new Vector(0,PhysicConstants.gravity()));
 }
 
 
 function update() {
+    //obj.update(game.time.elapsedMS/1000 );
 	/*
 	for(var i = 0 ; i < bullets.length ; ++i){
 		var bullet = bullets[i];
