@@ -48,6 +48,8 @@ function create() {
 	texAngle.anchor.setTo(0.5);
 	texAngle.font = 'Revalia';
     texAngle.fontSize = 60;
+
+
 }
 
 

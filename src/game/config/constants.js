@@ -1,4 +1,4 @@
-function GameConstants(){
+var GameConstants = function() {
 	this.gravity = 4.9;
 	this.height = 0;
 	this.width = 0;
@@ -22,4 +22,5 @@ function GameConstants(){
 	this.getWindowWidth = function(){
 		return this.width;
 	}
-}	
+}
+

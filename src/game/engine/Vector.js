@@ -2,19 +2,19 @@ var Vector = function (x, y, z) {
 	this.x = null;
 	this.y = null;
 	this.z = null;
-	if(typeof x === 'undefined'){
+	if(typeof x === UNDEFINED()){
 		this.x = 0;
 	}
 	else{
 		this.x = x;
 	}
-	if(typeof y === 'undefined'){
+	if(typeof y === UNDEFINED()){
 		this.y = 0;
 	}
 	else{
 		this.y = y;
 	}
-	if(typeof z === 'undefined'){
+	if(typeof z === UNDEFINED()){
 		this.z = 0;
 	}
 	else{
@@ -22,12 +22,16 @@ var Vector = function (x, y, z) {
 	}
 }
 
+Vector.prototype.selfScale = function(scalar) {
+	this.x *= scalar;
+	this.y *= scalar;
+	this.z *= scalar;
+}
+
 Vector.prototype.scale = function(scalar) {
 	var result = this.clone();
 
-	result.x *= scalar;
-	result.y *= scalar;
-	result.z *= scalar;
+	result.selfScale(scalar);
 
 	return result;
 };
@@ -65,6 +69,46 @@ Vector.prototype.clone = function() {
 	result.x = this.x;
 	result.y = this.y;
 	result.z = this.z;
+
+	return result;
+}
+
+Vector.prototype.selfAdd = function(v) {
+	this.x += v.x;
+	this.y += v.y;
+	this.z += v.z;
+}
+
+Vector.prototype.add = function(v) {
+	var result = this.clone();
+
+	result.selfAdd(v);
+
+	return result;
+}
+
+Vector.prototype.selfSubstract = function(v) {
+	this.selfAdd(v.not());
+}
+
+Vector.prototype.substract = function(v) {
+	var result = this.clone();
+
+	result.selfSubstract(v);
+
+	return result;
+}
+
+Vector.prototype.selfNot = function() {
+	this.x = -(this.x);
+	this.y = -(this.y);
+	this.z = -(this.z);
+}
+
+Vector.prototype.not = function() {
+	var result = this.clone();
+
+	result.selfNot();
 
 	return result;
 }
