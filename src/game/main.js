@@ -48,11 +48,6 @@ function create() {
 	texAngle.anchor.setTo(0.5);
 	texAngle.font = 'Revalia';
     texAngle.fontSize = 60;
-
-    var linear = new Linear();
-
-    var vector = new Vector(0,1,0);
-    var vector2 = new Vector(0,1,0);
 }
 
 
