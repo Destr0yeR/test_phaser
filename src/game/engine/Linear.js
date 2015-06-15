@@ -29,7 +29,7 @@ function Linear() {
 
 	function angle(u, v) {
 		var result = dotProduct(u, v)/(_length(u)*_length(v));
-		return (Math.acos(result*180)/Math.acos(-1);
+		return Math.acos(result*180)/Math.acos(-1);
 	}
 
 	function _length(u) {
