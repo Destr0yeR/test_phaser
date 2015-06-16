@@ -17,7 +17,7 @@ var PhysicsController = new Physics(constants.getGravity());
 var textAngle = null;
 var angle = 0;
 
-var obj = new PhysicObject(5);
+var obj = new PhysicObject(5, new Vector());
 google: {
       families: ['Revalia']
     }
