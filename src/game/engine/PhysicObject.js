@@ -133,14 +133,11 @@ PhysicObject.prototype.updateForces = function() {
 	/**
 		TODO(javier): generate force from colliders
 	*/
-	switch(this.boundary_type){
-		PhysicConstants.RECTANGLE():
-			break;
-		PhysicConstants.CIRCLE():
-			break;
-		default:
-			throw "Boundary dint been defined";
-			break;
+	for(var key in this.colliders){
+		if(	this.boundary_type == PhysicConstants.RECTANGLE() && 
+			this.colliders[key].boundary_type == PhysicConstants.RECTANGLEs()) {
+				this.collideRectangleByRectangle(this.colliders[key]);
+		}
 	}
 }
 
