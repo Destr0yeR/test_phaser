@@ -51,12 +51,13 @@ function create() {
     texAngle.fontSize = 60;
 
     console.log(obj);
+    obj.addSprite(new Bullet('white', 0, 0));
     obj.addForce(new Vector(0,PhysicConstants.gravity()));
 }
 
 
 function update() {
-    //obj.update(game.time.elapsedMS/1000 );
+    obj.update(game.time.elapsedMS/1000 );
 	/*
 	for(var i = 0 ; i < bullets.length ; ++i){
 		var bullet = bullets[i];

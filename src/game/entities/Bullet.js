@@ -25,14 +25,6 @@ function Bullet(name, x, y) {
 	}
 
 	this.update = function(){
-
-		this.x += this.velocity.x;
-
-		if(this.gravity){
-			this.velocity.y += constants.getGravity();
-			this.y += this.velocity.y;
-			this.velocity.y -= constants.getGravity();
-		}
 		this.sprite.x = this.x;
 		this.sprite.y = this.y;
 	}

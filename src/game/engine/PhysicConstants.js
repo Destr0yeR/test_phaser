@@ -1,7 +1,7 @@
 
 var PhysicConstants = (function() {
 	return {
-		gravity: function(){ return 9.8; },
+		gravity: function(){ return 98; },
 		RECTANGLE: function(){ return 'RECTANGLE'; },
 		CIRCLE: function(){ return 'CIRCLE'; }
 	};

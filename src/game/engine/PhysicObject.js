@@ -11,18 +11,18 @@ var PhysicObject = function(mass, position, w, h, d) {
 	this.forces 		= new Array();
 
 	/**
-		Instant Aceleration of the objet generated from
+		Instant acceleration of the objet generated from
 		a = F/m
 		F: resultant force
 		m: mass of the body
 	*/
-	this.aceleration 	= new Vector();
+	this.acceleration 	= new Vector();
 
 	/**
 		Intant Velocity of the object generated from
 		vf =  v0 + (La + Na)/2;
-		La: last aceleration
-		Na: new Aceleration
+		La: last acceleration
+		Na: new acceleration
 	*/
 	this.velocity 		= new Vector();
 
@@ -92,15 +92,17 @@ PhysicObject.prototype.update = function(delta) {
 	for(var key in this.forces) {
 		new_resultant_force.selfAdd(this.forces[key]);
 	}
-	var new_aceleration = new_resultant_force.scale(1/this.mass);
+	var new_acceleration = new_resultant_force.scale(1/this.mass);
 
-	this.position = this.position.add(this.velocity.scale(delta).add(this.aceleration.scale(delta*delta*0.5)));
-	console.log(this.position);
-	this.velocity = this.aceleration.add(new_aceleration).scale(0.5);
-	console.log(this.velocity);
-	this.aceleration = new_aceleration;
-	console.log(this.aceleration);
-	console.log('End of update');
+	this.position.selfAdd(this.velocity.scale(delta).add(this.acceleration.scale(delta*delta*0.5)));
+	
+	this.velocity.selfAdd(this.acceleration.add(new_acceleration).scale(0.5));
+
+	this.acceleration = new_acceleration;
+
+	this.sprite.x = this.position.x;
+	this.sprite.y = this.position.y;
+	this.sprite.update();
 };
 
 PhysicObject.prototype.addForce = function(force) {
@@ -131,8 +133,14 @@ PhysicObject.prototype.updateForces = function() {
 	/**
 		TODO(javier): generate force from colliders
 	*/
-	for(var key in this.colliders) {
-
+	switch(this.boundary_type){
+		PhysicConstants.RECTANGLE():
+			break;
+		PhysicConstants.CIRCLE():
+			break;
+		default:
+			throw "Boundary dint been defined";
+			break;
 	}
 }
 
@@ -156,4 +164,9 @@ PhysicObject.prototype.disableGravity = function() {
 
 PhysicObject.prototype.calculateCenter = function() {
 	this.center = new Vector(this.position.x + (this.w)/2 , this.position.y + (this.h)/2, this.position.z + (this.d)/2);
+}
+
+
+PhysicObject.prototype.addSprite = function(sprite) {
+	this.sprite = sprite;
 }
